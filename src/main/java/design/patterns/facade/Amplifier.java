@@ -6,7 +6,7 @@ class Amplifier {
     }
 
     public void setDvd(DvdPlayer dvd) {
-        System.out.println("Amplifier setting DVD player");
+        System.out.println("Amplifier setting DVD player : " + dvd);
     }
 
     public void setVolume(int volume) {
