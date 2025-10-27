@@ -5,11 +5,11 @@ import design.practice.tictactoe.algo.MachineAlgo;
 import design.practice.tictactoe.enums.Move;
 import design.practice.tictactoe.enums.Symbol;
 
-public class ComputerEasyStrategy implements PlayerStrategy {
+public class ComputerStrategy implements PlayerStrategy {
     private final MachineAlgo machineAlgo;
     private final String playerName;
 
-    public ComputerEasyStrategy(MachineAlgo machineAlgo, String playerName) {
+    public ComputerStrategy(MachineAlgo machineAlgo, String playerName) {
         this.machineAlgo = machineAlgo;
         this.playerName = playerName;
     }
