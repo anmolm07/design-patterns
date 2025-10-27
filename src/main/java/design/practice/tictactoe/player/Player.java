@@ -5,8 +5,8 @@ import design.practice.tictactoe.stats.Statistics;
 import design.practice.tictactoe.strategy.PlayerStrategy;
 
 public class Player {
-    private PlayerStrategy strategy;
-    private Statistics stats;
+    private final PlayerStrategy strategy;
+    private final Statistics stats;
     private Symbol currentSymbol;
 
     public PlayerStrategy getStrategy() {
@@ -29,8 +29,13 @@ public class Player {
     }
 
     public void showStats(){
-        System.out.println("SHOWING STATS FOR :" + this.strategy.getPlayerName());
+        System.out.println("Showing stats for  :" + this.strategy.getPlayerName());
         this.stats.showStats();
+    }
+
+    public void showFullStats(){
+        System.out.println("Showing full stats for :" + this.strategy.getPlayerName());
+        this.stats.showFullStats();
     }
 
     public void addXWin() {

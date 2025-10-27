@@ -1,7 +1,9 @@
 package design.practice.tictactoe.strategy;
 
 import design.practice.tictactoe.Board;
-import design.practice.tictactoe.enums.Position;
+import design.practice.tictactoe.enums.Move;
+import design.practice.tictactoe.enums.Symbol;
+
 import java.util.Scanner;
 
 public class HumanPlayerStrategy implements PlayerStrategy {
@@ -14,13 +16,13 @@ public class HumanPlayerStrategy implements PlayerStrategy {
     }
 
     @Override
-    public Position makeMove(Board Board) {
+    public Move makeMove(Board Board, Symbol symbol) {
         while (true) {
-            System.out.printf("%s, enter your move (row [0-2] and column [0-2]): ", playerName);
+            System.out.printf("%s, enter your move (row and column), you are %s : ", this.playerName,symbol.toString());
             try {
                 int row = scanner.nextInt();
                 int col = scanner.nextInt();
-                Position move = new Position(row, col);
+                Move move = new Move(row, col);
                 if (Board.isValidMove(move)) {
                     return move;
                 }
@@ -33,6 +35,6 @@ public class HumanPlayerStrategy implements PlayerStrategy {
     }
 
     public String getPlayerName() {
-        return playerName;
+        return this.playerName;
     }
 }

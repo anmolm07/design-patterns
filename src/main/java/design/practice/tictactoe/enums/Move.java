@@ -1,4 +1,4 @@
 package design.practice.tictactoe.enums;
 
-public record Position(int row, int col) {
+public record Move(int row, int col) {
 }

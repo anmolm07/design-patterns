@@ -1,13 +1,13 @@
 package design.practice.tictactoe;
 
-import design.practice.tictactoe.enums.Position;
+import design.practice.tictactoe.enums.Move;
 import design.practice.tictactoe.enums.Symbol;
 import design.practice.tictactoe.player.Player;
 import design.practice.tictactoe.enums.State;
 
 public class Board {
     private final int size;
-    private Symbol[][] grid;
+    private final Symbol[][] grid;
 
     Board(int size) {
         this.size = size;
@@ -19,17 +19,17 @@ public class Board {
         }
     }
 
-    void makeMove(Position pos, Player currentPlayer) {
+    void makeMove(Move pos, Player currentPlayer) {
         if (!isValidMove(pos)) {
             throw new IllegalArgumentException("Invalid move");
         }
         grid[pos.row()][pos.col()] = currentPlayer.getCurrentSymbol();
     }
 
-    public boolean isValidMove(Position pos) {
-        return pos.row() >= 0 && pos.row() < size
-                && pos.col() >= 0 && pos.col() < size
-                && grid[pos.row()][pos.col()] == Symbol.EMPTY;
+    public boolean isValidMove(Move move) {
+        return move.row() >= 0 && move.row() < size
+                && move.col() >= 0 && move.col() < size
+                && grid[move.row()][move.col()] == Symbol.EMPTY;
     }
 
 
@@ -95,11 +95,13 @@ public class Board {
         for (int diagonal = 0; diagonal < size; diagonal++) {
             if (grid[diagonal][diagonal] != first) {
                 firstDiagonal = false;
+                break;
             }
         }
         for (int diagonal = 0; diagonal < size; diagonal++) {
             if (grid[diagonal][size - diagonal - 1] != first) {
                 secondDiagonal = false;
+                break;
             }
         }
         return firstDiagonal || secondDiagonal;
@@ -142,5 +144,9 @@ public class Board {
             }
         }
         System.out.println();
+    }
+
+    public Symbol[][] getGrid() {
+        return grid;
     }
 }

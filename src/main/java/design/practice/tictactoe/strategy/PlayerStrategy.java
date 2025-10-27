@@ -1,9 +1,10 @@
 package design.practice.tictactoe.strategy;
 
 import design.practice.tictactoe.Board;
-import design.practice.tictactoe.enums.Position;
+import design.practice.tictactoe.enums.Move;
+import design.practice.tictactoe.enums.Symbol;
 
 public interface PlayerStrategy {
-    Position makeMove(Board Board);
-    public String getPlayerName();
+    Move makeMove(Board Board, Symbol symbol);
+    String getPlayerName();
 }

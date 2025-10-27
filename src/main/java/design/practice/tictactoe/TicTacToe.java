@@ -1,14 +1,14 @@
 package design.practice.tictactoe;
 
-import design.practice.tictactoe.enums.Position;
+import design.practice.tictactoe.enums.Move;
 import design.practice.tictactoe.enums.State;
 import design.practice.tictactoe.enums.Symbol;
 import design.practice.tictactoe.player.Player;
 
 public class TicTacToe {
-    private Board board;
-    private Player playerX;
-    private Player playerO;
+    private final Board board;
+    private final Player playerX;
+    private final Player playerO;
     private Player currentPlayer;
 
     TicTacToe(int size, Player player1, Player player2) {
@@ -28,7 +28,7 @@ public class TicTacToe {
         do {
             switchPlayer();
             board.printBoard();
-            Position move = currentPlayer.getStrategy().makeMove(board);
+            Move move = currentPlayer.getStrategy().makeMove(board, currentPlayer.getCurrentSymbol());
             board.makeMove(move, currentPlayer);
         }while(board.checkState(currentPlayer) == State.Continue);
         board.printBoard();

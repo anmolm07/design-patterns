@@ -95,9 +95,24 @@ public class Statistics {
     }
 
     public void showStats() {
-        System.out.printf("Total Number of Matches Played: %d\n", totalNumber);
-        System.out.printf("Total Wins: %d\n", totalWins);
-        System.out.printf("Total Losses: %d\n", totalLosses);
-        System.out.printf("Total Draws: %d\n", totalDraws);
+        System.out.printf("Total number of matches played: %d\n", totalNumber);
+        System.out.printf("Total wins: %d\n", totalWins);
+        System.out.printf("Total losses: %d\n", totalLosses);
+        System.out.printf("Total draws: %d\n", totalDraws);
+    }
+
+    public void showFullStats() {
+        System.out.printf("Total number of matches played: %d\n", totalNumber);
+        System.out.printf("Total wins: %d\n", totalWins);
+        System.out.printf("Total losses: %d\n", totalLosses);
+        System.out.printf("Total draws: %d\n", totalDraws);
+        System.out.printf("Played as X: %d\n", playedAsX);
+        System.out.printf("Wins as  X: %d\n", winsAsX);
+        System.out.printf("Loss as  X: %d\n", lossesAsX);
+        System.out.printf("Draws as  X: %d\n", drawsAsX);
+        System.out.printf("Played as O: %d\n", playedAsO);
+        System.out.printf("Wins as  O: %d\n", winsAsO);
+        System.out.printf("Loss as  O: %d\n", lossesAsO);
+        System.out.printf("Draws as  O: %d\n", drawsAsO);
     }
 }
