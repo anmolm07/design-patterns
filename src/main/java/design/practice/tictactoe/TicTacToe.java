@@ -1,9 +1,11 @@
 package design.practice.tictactoe;
 
 import design.practice.tictactoe.enums.Move;
-import design.practice.tictactoe.enums.State;
+import design.practice.tictactoe.state.State;
 import design.practice.tictactoe.enums.Symbol;
 import design.practice.tictactoe.player.Player;
+
+import static design.practice.tictactoe.state.CheckState.checkState;
 
 public class TicTacToe {
     private final Board board;
@@ -25,14 +27,14 @@ public class TicTacToe {
     }
 
     public void play() {
+        board.printBoard();
         do {
             switchPlayer();
-            board.printBoard();
             Move move = currentPlayer.getStrategy().makeMove(board, currentPlayer.getCurrentSymbol());
-            board.makeMove(move, currentPlayer);
-        }while(board.checkState(currentPlayer) == State.Continue);
-        board.printBoard();
-        State result = board.checkState(currentPlayer);
+            board.makeMove(move, currentPlayer.getCurrentSymbol());
+            board.printBoard();
+        } while (checkState(board, currentPlayer.getCurrentSymbol()) == State.Continue);
+        State result = checkState(board, currentPlayer.getCurrentSymbol());
         addStats(result);
         announceResult(result);
         playerX.setCurrentSymbol(Symbol.EMPTY);
@@ -41,10 +43,8 @@ public class TicTacToe {
     }
 
     private void announceResult(State result) {
-        if (result == State.XWinning) {
-            System.out.println("Player X wins!");
-        } else if (result == State.OWinning) {
-            System.out.println("Player O wins!");
+        if (result == State.Winning) {
+            System.out.printf("%s wins!\n", currentPlayer.getStrategy().getPlayerName());
         } else {
             System.out.println("It's a draw!");
         }
@@ -52,10 +52,10 @@ public class TicTacToe {
 
 
     private void addStats(State result) {
-        if (result == State.XWinning) {
+        if (result == State.Winning && currentPlayer == playerX) {
             playerX.addXWin();
             playerO.addOLoss();
-        } else if (result == State.OWinning) {
+        } else if (result == State.Winning && currentPlayer == playerO) {
             playerO.addOWin();
             playerX.addXLoss();
         } else {

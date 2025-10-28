@@ -16,7 +16,7 @@ public class ComputerStrategy implements PlayerStrategy {
 
     @Override
     public Move makeMove(Board board, Symbol symbol) {
-        Move move = this.machineAlgo.findNextMove(board.getGrid(), symbol);
+        Move move = this.machineAlgo.findNextMove(board, symbol);
         System.out.printf("%s , enter your move (row and column), you are %s : %d %d\n",
                 this.playerName, symbol.toString(), move.row(), move.col());
 

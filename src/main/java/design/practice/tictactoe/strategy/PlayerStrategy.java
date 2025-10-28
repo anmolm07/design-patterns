@@ -5,6 +5,6 @@ import design.practice.tictactoe.enums.Move;
 import design.practice.tictactoe.enums.Symbol;
 
 public interface PlayerStrategy {
-    Move makeMove(Board Board, Symbol symbol);
+    Move makeMove(Board board, Symbol symbol);
     String getPlayerName();
 }

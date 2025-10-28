@@ -16,14 +16,14 @@ public class HumanPlayerStrategy implements PlayerStrategy {
     }
 
     @Override
-    public Move makeMove(Board Board, Symbol symbol) {
+    public Move makeMove(Board board, Symbol symbol) {
         while (true) {
             System.out.printf("%s, enter your move (row and column), you are %s : ", this.playerName,symbol.toString());
             try {
                 int row = scanner.nextInt();
                 int col = scanner.nextInt();
                 Move move = new Move(row, col);
-                if (Board.isValidMove(move)) {
+                if (board.isValidMove(move)) {
                     return move;
                 }
                 System.out.println("Invalid move. Try again.");

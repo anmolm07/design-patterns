@@ -1,15 +1,17 @@
 package design.practice.tictactoe.algo;
 
+import design.practice.tictactoe.Board;
 import design.practice.tictactoe.enums.Move;
 import design.practice.tictactoe.enums.Symbol;
+import design.practice.tictactoe.state.State;
+
+import static design.practice.tictactoe.state.CheckState.checkState;
 
 
 public class MediumAlgo implements MachineAlgo {
 
     @Override
-    public Move findNextMove(Symbol[][] board, Symbol symbol) {
-        int n = board.length;
-
+    public Move findNextMove(Board board, Symbol symbol) {
         Move winningMove = findImmediateWin(board, symbol);
         if (winningMove != null) return winningMove;
 
@@ -18,56 +20,27 @@ public class MediumAlgo implements MachineAlgo {
         if (blockMove != null) return blockMove;
 
         // 3. Strategic move (center, corners, then any empty)
-        return findStrategicMove(board);
+        return findStrategicMove(board.getGrid());
     }
 
-    private Move findImmediateWin(Symbol[][] board, Symbol symbol) {
-        int n = board.length;
-
+    private Move findImmediateWin(Board board, Symbol symbol) {
+        int n = board.getSize();
         for (int i = 0; i < n; i++) {
             for (int j = 0; j < n; j++) {
-                if (isEmpty(board[i][j])) {
-                    board[i][j] = symbol;
-                    if (isWinning(board, symbol)) {
-                        board[i][j] = Symbol.EMPTY; // undo
+                Move move = new Move(i, j);
+                if (board.isValidMove(move)) {
+                    board.makeMove(move, symbol);
+                    if (checkState(board, symbol) == State.Winning) {
+                        board.undoLastMove(); // undo
                         return new Move(i, j);
                     }
-                    board[i][j] = Symbol.EMPTY; // undo
+                    board.undoLastMove(); // undo
                 }
             }
         }
         return null;
     }
 
-    private boolean isWinning(Symbol[][] board, Symbol symbol) {
-        int n = board.length;
-
-        for (int i = 0; i < n; i++) {
-            if (isLineWin(board, symbol, i, true) || isLineWin(board, symbol, i, false)) {
-                return true;
-            }
-        }
-
-        return isDiagonalWin(board, symbol, true) || isDiagonalWin(board, symbol, false);
-    }
-
-    private boolean isLineWin(Symbol[][] board, Symbol symbol, int index, boolean isRow) {
-        int n = board.length;
-        for (int i = 0; i < n; i++) {
-            Symbol cell = isRow ? board[index][i] : board[i][index];
-            if (!(symbol == cell)) return false;
-        }
-        return true;
-    }
-
-    public static boolean isDiagonalWin(Symbol[][] board, Symbol symbol, boolean mainDiagonal) {
-        int n = board.length;
-        for (int i = 0; i < n; i++) {
-            Symbol cell = mainDiagonal ? board[i][i] : board[i][n - 1 - i];
-            if (!(symbol == cell)) return false;
-        }
-        return true;
-    }
 
     private static Move findStrategicMove(Symbol[][] board) {
         int n = board.length;
